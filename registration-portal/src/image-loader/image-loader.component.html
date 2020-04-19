@@ -1,0 +1,12 @@
+
+<!-- <span style="color:red;" *ngIf="message">{{message}}</span> -->
+
+<div class="pull-right">
+    <div class="image-loader-section text-center">
+        <a href="javascript:void(0)" *ngIf="!imgURL">
+           <p><u>Upload your photo</u></p> 
+        </a>
+        <img [src]="imgURL" style='height: 100%; width: 100%; object-fit: cover' *ngIf="imgURL">
+    </div>
+    <input #file type="file" accept='image/*' (change)="preview(file.files)" />
+</div>

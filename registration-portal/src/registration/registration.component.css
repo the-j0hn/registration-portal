@@ -1,0 +1,132 @@
+.vertical-line {
+    height: 650px;
+    border-left: 2px solid gray;
+    width: 3%;
+}
+
+.image-loader-margin {
+    margin-top: 50px;
+    margin-left: 30px;
+}
+
+.label-spacing {
+    padding-left: 0px;
+    margin-top: 20px
+}
+
+div > input {
+    margin-right: 20px;
+    margin-top: 20px;
+    border:  rgb(22, 157, 211) solid 1px;
+}
+
+div > select {
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.field-spacing {
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.slider {
+    width: 100%;
+}
+
+.block-width > input {
+    width: 100%;
+}
+
+.block-width > select {
+    width: 100%;
+    border: rgb(22, 157, 211) solid 1px;
+}
+
+.submit-button {
+    background-color: rgb(22, 157, 211);
+    color: white;
+    width: 55%;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.subscribe-checkbox {
+    background:  rgb(22, 157, 211);
+    width: 20px;
+    height: 20px;
+    margin-right: 12px !important;
+}
+
+.left-spacing {
+    padding-right: 0px;
+    margin-left: 20px;
+}
+
+.left-padding {
+    padding-left: 0px;
+}
+
+input[type=checkbox] {
+    background: green !important;
+    color: black !important;
+}
+
+.first-name-error {
+    padding-left: 75px;
+    color: red;
+}
+
+.last-name-error {
+    padding-left: 0px;
+    color: red;
+}
+
+.error-msg {
+    color: red;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: rgb(22, 157, 211);
+    height: 20px;
+    width: 10px;
+    margin-top: -8px;
+    
+  }
+  input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: #ddd;
+    border-color: transparent !important;
+  }
+
+  input[type=range]:focus {
+    outline: none;
+ }
+
+
+  .age-slider-border > input {
+    border: none;
+    border-color: transparent !important;
+  }
+
+  .first-range-label {
+    padding-left: 0px;
+  }
+
+  .second-range-label {
+    padding-left: 26px;
+  }
+
+  .third-range-label {
+    padding-left: 68px;
+  }
+
+  .fourth-range-label {
+      padding-right: 0px;
+      padding-left: 56px;
+  }

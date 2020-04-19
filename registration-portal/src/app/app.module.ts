@@ -7,17 +7,25 @@ import { RegistrationComponent } from 'src/registration/registration.compnent';
 import { ProfileComponent } from 'src/profile/profile.component';
 import { RouterModule } from '@angular/router';
 import { RouteModule } from 'src/routing/route.module';
+import { ImageLoaderComponent } from 'src/image-loader/image-loader.component';
+import { FormsModule } from '@angular/forms'
+import { PhoneNumberFormatter } from 'src/shared/pipes/phoneNumber-formatter.pipe';
+import { FormatPhoneNumber } from 'src/shared/directives/format-phone.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RegistrationComponent,
-    ProfileComponent
+    ProfileComponent,
+    ImageLoaderComponent,
+    PhoneNumberFormatter,
+    FormatPhoneNumber
   ],
   imports: [
     BrowserModule,
-    RouteModule
+    RouteModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
