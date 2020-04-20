@@ -40,8 +40,8 @@
                         <label for="name">Age </label>
                     </div>
                     <div class="col-md-9 age-slider-border">
-                        <input type="range" list="steplist" max="4" min="1" 
-                          [(ngModel)]="ageRange"  #userAgeRange="ngModel"
+                        <input type="range" list="steplist" max="4" min="1" name="ageRange"
+                          [(ngModel)]="ageRange"  #userAgeRange="ngModel" (input)="setAgeRangeValue($event.target.value)"
                         >
                         <datalist id="steplist">
                             <option value="1" label="13-19"></option>
@@ -57,7 +57,7 @@
                         <div class="col-md-3 fourth-range-label"> 45 & Above </div>
                     </div>
                 </div>
-                <h1>{{'TEst' + ageRange}}</h1>
+                
                 <!-- Email -->
                 <div class="col-md-10">
                     <div class="col-md-1 label-spacing text-right">
@@ -96,7 +96,7 @@
                         <label for="state">State </label>
                     </div>
                     <div class="col-md-9 block-width">
-                        <select id="state" (change)="selectCountry($event.target.value)"
+                        <select id="state" name="state" (change)="selectCountry($event.target.value)"
                              required
                         >
                             <option  *ngFor="let stateList of countryAndStateList" [value]="stateList.state">
@@ -112,7 +112,7 @@
                         <label for="country">Country </label>
                     </div>
                     <div class="col-md-9 block-width">
-                        <select id="country" [(ngModel)]="country" #userCountry="ngModel" required>
+                        <select id="country"  [(ngModel)]="country" #userCountry="ngModel" required>
                             <option >{{selectedCountry}}</option>
                         </select>
                     </div>
@@ -228,8 +228,8 @@
                 <div class="col-md-10">
                     <div class="col-md-1 label-spacing text-right left-spacing">
                         <div class="wrapper">
-                            <input type="checkbox" id="subscribe" class="subscribe-checkbox" [(ngModel)]="subscribe"
-                                #userSubscription="ngModel"
+                            <input type="checkbox" id="subscribe" name= "subscribe" class="subscribe-checkbox" 
+                                [(ngModel)]="subscribe" #userSubscription="ngModel"
                             >
                         </div>
                     </div>

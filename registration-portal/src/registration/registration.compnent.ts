@@ -13,6 +13,7 @@ export class RegistrationComponent implements OnInit {
   public selectedCountry: string = ' ';
   public countryAndStateList: ICountryAndStateList[] = COUNTRY_LIST_CONST;
   public listOfInterests: string[];
+  public ageRangeValue: string;
 
   // form elements
   public firstName: string;
@@ -47,5 +48,19 @@ export class RegistrationComponent implements OnInit {
     let indexOfRemoedInterest = this.listOfInterests.indexOf(removedInterest);
     this.listOfInterests.splice(indexOfRemoedInterest, 1);
     this.interests = this.listOfInterests.join();
+  }
+
+  public setAgeRangeValue(ageRange: string) {
+    console.log('inside function');
+    switch(ageRange) {
+      case '1' : this.ageRangeValue = 'above 13 years';
+                 break;  
+      case '2' : this.ageRangeValue = 'above 20 years';
+                 break;  
+      case '3' : this.ageRangeValue = 'above 30 years'; 
+                 break; 
+      case '4' : this.ageRangeValue = 'above 45 years';  
+                 break;
+    }
   }
 }
