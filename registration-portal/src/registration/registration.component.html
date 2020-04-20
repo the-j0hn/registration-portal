@@ -34,7 +34,6 @@
                             Last name is invalid!
                         </div>
                 </div>
-                
                 <!-- Age -->
                 <div class="col-md-10">
                     <div class="col-md-1 label-spacing text-right">
@@ -58,7 +57,7 @@
                         <div class="col-md-3 fourth-range-label"> 45 & Above </div>
                     </div>
                 </div>
-                
+                <h1>{{'TEst' + ageRange}}</h1>
                 <!-- Email -->
                 <div class="col-md-10">
                     <div class="col-md-1 label-spacing text-right">
@@ -189,7 +188,7 @@
                         </div>
                         <div class="col-md-9 block-width">
                             <input type="text" id="companyAddress" name="companyAddress" placeholder="Company Address"
-                             [(ngModel)]="companyAddress1" #userCompanyAddress="ngModel" required
+                             [(ngModel)]="companyAddress" #userCompanyAddress="ngModel" required
                             >
                         </div>
                         <!-- Company Address Error Message-->
@@ -205,10 +204,26 @@
                         <label for="intrests">Interests </label>
                     </div>
                     <div class="col-md-9 block-width">
-                        <input type="text" id="intrests" name="interests">
+                        <input type="text" id="intrests" name="interests" (ngModelChange)="showInterest($event)"
+                            [ngModel]="interests" #userInterests="ngModel" required autocomplete="off"
+                        >
                     </div>
                 </div>
-                
+                <div class="col-md-10">
+                    <div class="col-md-9 col-md-offset-1">
+                        <ng-container *ngFor="let interest of listOfInterests">
+                            <div class="col-md-3 interest-popup-spacing" [ngClass]="{'blue-backgound-color': interest }" >
+                                {{interest}}
+                                <span class="text-right close-button-position" 
+                                    *ngIf="interest" (click)="removeInterest(interest)"
+                                >
+                                    x
+                                </span>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
                 <!-- Subscribe to news letter -->
                 <div class="col-md-10">
                     <div class="col-md-1 label-spacing text-right left-spacing">

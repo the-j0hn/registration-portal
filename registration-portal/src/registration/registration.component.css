@@ -88,45 +88,60 @@ input[type=checkbox] {
 
 input[type=range] {
     -webkit-appearance: none;
-  }
-  input[type=range]::-webkit-slider-thumb {
+}
+
+input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     background: rgb(22, 157, 211);
     height: 20px;
     width: 10px;
     margin-top: -8px;
-    
-  }
-  input[type=range]::-webkit-slider-runnable-track {
+}
+
+input[type=range]::-webkit-slider-runnable-track {
     width: 300px;
     height: 5px;
     background: #ddd;
     border-color: transparent !important;
-  }
+}
 
-  input[type=range]:focus {
+input[type=range]:focus {
     outline: none;
- }
+}
 
 
-  .age-slider-border > input {
-    border: none;
-    border-color: transparent !important;
-  }
+.age-slider-border > input {
+border: none;
+border-color: transparent !important;
+}
 
-  .first-range-label {
-    padding-left: 0px;
-  }
+.first-range-label {
+padding-left: 0px;
+}
 
-  .second-range-label {
-    padding-left: 26px;
-  }
+.second-range-label {
+padding-left: 26px;
+}
 
-  .third-range-label {
-    padding-left: 68px;
-  }
+.third-range-label {
+padding-left: 68px;
+}
 
-  .fourth-range-label {
-      padding-right: 0px;
-      padding-left: 56px;
-  }
+.fourth-range-label {
+    padding-right: 0px;
+    padding-left: 56px;
+}
+
+.interest-popup-spacing {
+margin-right: 20px;
+margin-top: 20px;
+color: white;
+}
+
+.blue-backgound-color {
+background-color: rgb(22, 157, 211);
+}
+
+.close-button-position {
+    float: right;
+}
