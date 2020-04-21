@@ -8,5 +8,11 @@
         </a>
         <img [src]="imgURL" style='height: 100%; width: 100%; object-fit: cover' *ngIf="imgURL">
     </div>
-    <input #file type="file" accept='image/*' (change)="preview(file.files)" />
+    <input #file type="file" accept='image/*' (change)="preview(file.files)" required>
+
+    <div class="col-md-9 text-center margin-top" *ngIf="enableEditProfile">
+        <a  class="blue-color" href="javascript:void(0)" (click)="editRegistrationProfile()">
+            <u>Edit profile</u>
+        </a>
+    </div>
 </div>

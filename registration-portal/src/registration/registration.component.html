@@ -1,12 +1,17 @@
-<form #registrationForm= "ngForm" (ngSubmit)="onSubmit(registrationForm)">
+
     <div class="col-md-12 image-loader-margin">
         <div class="col-md-3">
-            <rp-image-loader></rp-image-loader>
+            <rp-image-loader 
+                (onPhotoUpload)="checkPhotoUploaded($event)"
+                (editProfile)="editProfile($event)"
+                [enableEditProfile]="showProfileSection"
+            >
+            </rp-image-loader>
         </div>
         <div class="col-md-1 vertical-line ">
         </div>
-        <div class="col-md-8">
-            <form #newUserForm="ngForm">
+        <div class="col-md-8" *ngIf="!showProfileSection">
+            <form #newUserForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
 
                 <!-- Name -->
                 <div class="col-md-10">
@@ -34,6 +39,7 @@
                             Last name is invalid!
                         </div>
                 </div>
+                
                 <!-- Age -->
                 <div class="col-md-10">
                     <div class="col-md-1 label-spacing text-right">
@@ -97,8 +103,9 @@
                     </div>
                     <div class="col-md-9 block-width">
                         <select id="state" name="state" (change)="selectCountry($event.target.value)"
-                             required
+                             [ngModel]="state" required autocomplete="off"
                         >
+                            <option [ngValue]="''" selected disabled>Please select</option>
                             <option  *ngFor="let stateList of countryAndStateList" [value]="stateList.state">
                                 {{stateList.state}}
                             </option>
@@ -205,8 +212,12 @@
                     </div>
                     <div class="col-md-9 block-width">
                         <input type="text" id="intrests" name="interests" (ngModelChange)="showInterest($event)"
-                            [ngModel]="interests" #userInterests="ngModel" required autocomplete="off"
+                            [(ngModel)]="interests" #userInterests="ngModel" required autocomplete="off"
                         >
+                    </div>
+                    <!-- Interest Error Message-->
+                    <div class="col-md-9 error-msg" *ngIf="!userInterests.valid && userInterests.touched">  
+                        Interest cann't be blank!
                     </div>
                 </div>
                 <div class="col-md-10">
@@ -237,15 +248,39 @@
                         <label class="field-spacing" for="subscribe">Subscribe to the news letter</label>
                     </div>
                 </div>
-    
+                
                 <!-- Submit Button -->
                 <div class="col-md-8 pull-right field-spacing">
-                        <button class="submit-button" type="submit" [disabled]="!newUserForm.form.valid"
+                        <button class="submit-button" type="submit" [disabled]="(!newUserForm.form.valid) || (!photoUploaded)"
                         >
                         Submit
                         </button>
                 </div>
             </form>
         </div>
+
+        <!--Profile Section-->
+        <div class="col-md-8 profile-section-spacing" *ngIf="showProfileSection">
+            <div class="col-md-10 text-left">
+                <p>
+                    I am <span>{{'Mr. ' + firstName + ' ' + lastName }}</span> and
+                    I am <span>{{' ' + ageRangeValue + ' '}}</span> and you can <br> send your emails
+                    to <span>{{' ' + email + ' .'}}</span> I lives <br> in the state of  <span>{{state + '.'}}</span>
+                    I like to <span>{{' ' + interestListInSentence + ' .'}}</span><br>
+                    <span class="white-color" *ngIf="subscribe">
+                        And please send me the news letters.
+                        <br>
+                    </span>
+                    Please reach out to me on my phone  <span>{{telephone | phoneNumberFormatter }}</span>.
+                </p>
+            </div>
+            <div class="col-md-10">
+                <button class="btn btn-primary agree-button" type="button" name="agree"
+                    (click)="onAgree()"
+                >
+                    Agree
+                </button>
+            </div>
+        </div>
     </div>
-</form>
+

@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HomeComponent } from 'src/home/home.component';
 import { RegistrationComponent } from 'src/registration/registration.compnent';
-import { ProfileComponent } from 'src/profile/profile.component';
 import { RouterModule } from '@angular/router';
 import { RouteModule } from 'src/routing/route.module';
 import { ImageLoaderComponent } from 'src/image-loader/image-loader.component';
@@ -17,7 +16,6 @@ import { FormatPhoneNumber } from 'src/shared/directives/format-phone.directive'
     AppComponent,
     HomeComponent,
     RegistrationComponent,
-    ProfileComponent,
     ImageLoaderComponent,
     PhoneNumberFormatter,
     FormatPhoneNumber
