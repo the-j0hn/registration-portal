@@ -1,0 +1,286 @@
+
+    <div class="col-md-12 image-loader-margin">
+        <div class="col-md-3">
+            <rp-image-loader 
+                (onPhotoUpload)="checkPhotoUploaded($event)"
+                (editProfile)="editProfile($event)"
+                [enableEditProfile]="showProfileSection"
+            >
+            </rp-image-loader>
+        </div>
+        <div class="col-md-1 vertical-line ">
+        </div>
+        <div class="col-md-8" *ngIf="!showProfileSection">
+            <form #newUserForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
+
+                <!-- Name -->
+                <div class="col-md-10">
+                    <div class="col-md-1 label-spacing text-right">
+                        <label for="name">Name </label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" id="firstName" name="firstname" placeholder="First Name"
+                            pattern="[a-zA-Z ]*" required  maxlength="20" [(ngModel)]="firstName" #userFirstName="ngModel"
+                        >
+                        <input type="text" id="lastName" name="lastname" placeholder="Last Name"
+                            pattern="[a-zA-Z ]*" required  [(ngModel)]="lastName" #userLastName="ngModel"
+                        >
+                    </div>
+                </div>
+                <!-- Name Error Messages-->
+                <div class="col-md-10">
+                        <div class="col-md-4 first-name-error" *ngIf="!userFirstName.valid && userFirstName.touched">  
+                            First name is invalid!
+                        </div>
+                        <div class="col-md-4 last-name-error" 
+                            [ngClass]="{'col-md-offset-4': !(!userFirstName.valid && userFirstName.touched)}"
+                            *ngIf="!userLastName.valid && userLastName.touched"
+                        >
+                            Last name is invalid!
+                        </div>
+                </div>
+                
+                <!-- Age -->
+                <div class="col-md-10">
+                    <div class="col-md-1 label-spacing text-right">
+                        <label for="name">Age </label>
+                    </div>
+                    <div class="col-md-9 age-slider-border">
+                        <input type="range" list="steplist" max="4" min="1" name="ageRange"
+                          [(ngModel)]="ageRange"  #userAgeRange="ngModel" (input)="setAgeRangeValue($event.target.value)"
+                        >
+                        <datalist id="steplist">
+                            <option value="1" label="13-19"></option>
+                            <option value="2" label="20-29"></option>
+                            <option value="3" label="30-45"></option>
+                            <option value="4" label="45 & Above"></option>
+                        </datalist>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="col-md-3 first-range-label"> 13-19 </div>
+                        <div class="col-md-3 second-range-label"> 20-29 </div>
+                        <div class="col-md-3 third-range-label"> 30-45 </div>
+                        <div class="col-md-3 fourth-range-label"> 45 & Above </div>
+                    </div>
+                </div>
+                
+                <!-- Email -->
+                <div class="col-md-10">
+                    <div class="col-md-1 label-spacing text-right">
+                        <label for="email">Email </label>
+                    </div>
+                    <div class="col-md-9 block-width">
+                        <input type="email" id="email" name="email" placeholder="Email"
+                            required [(ngModel)]="email" #userEmail="ngModel" email
+                            pattern="^[a-zA-Z]{1}[a-zA-Z0-9.\-_]*@[a-zA-Z]{1}[a-zA-Z.-]*[a-zA-Z]{1}[.][a-zA-Z]{2,}$"
+                        >
+                    </div>
+                    <div class="col-md-9 error-msg" *ngIf="!userEmail.valid && userEmail.touched">  
+                        Email is invalid!
+                    </div>
+                </div>
+                
+                <!-- Telephone -->
+                <div class="col-md-10">
+                    <div class="col-md-1 label-spacing text-right">
+                        <label for="telephone">Tel </label>
+                    </div>
+                    <div class="col-md-9 block-width">
+                        <input type="tel" id="telephone" name="telephone" placeholder="Telephone Number" 
+                         formatPhoneNumber required [(ngModel)]="telephone" #userTelephone="ngModel" maxlength="14"
+                        >
+                    </div>
+                    <!-- Error message of Email -->
+                    <div class="col-md-9 error-msg" *ngIf="!userTelephone.valid && userTelephone.touched">  
+                        Telephone number is invalid!
+                    </div>
+                </div>
+                
+                <!-- State -->
+                <div class="col-md-10">
+                    <div class="col-md-1 label-spacing text-right">
+                        <label for="state">State </label>
+                    </div>
+                    <div class="col-md-9 block-width">
+                        <select id="state" name="state" (change)="selectCountry($event.target.value)"
+                             [ngModel]="state" required autocomplete="off"
+                        >
+                            <option [ngValue]="''" selected disabled>Please select</option>
+                            <option  *ngFor="let stateList of countryAndStateList" [value]="stateList.state">
+                                {{stateList.state}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Country -->
+                <div class="col-md-10">
+                    <div class="col-md-1 label-spacing text-right">
+                        <label for="country">Country </label>
+                    </div>
+                    <div class="col-md-9 block-width">
+                        <select id="country"  [(ngModel)]="country" #userCountry="ngModel" required>
+                            <option >{{selectedCountry}}</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Address -->
+                <div class="col-md-10">
+                    <div class="col-md-1 label-spacing text-right">
+                        <label for="address">Address </label>
+                    </div>
+                    <div class="col-md-9 block-width">
+                        <select id="address" name="address" [(ngModel)]="address" #userAddress="ngModel" required>
+                            <option value="please select" [selected]="true">Please select</option>
+                            <option value="home">Home</option>
+                            <option value="company">Company</option>
+                        </select>
+                    </div>
+                
+                </div>
+                <!-- Home Address -->
+                <div *ngIf="address === 'home'">
+                    <div class="col-md-10">
+                        <div class="col-md-1 label-spacing text-right">
+                            <label for="address">Address1 </label>
+                        </div>
+                        <div class="col-md-9 block-width">
+                            <input type="text" id="address1" name="address1" placeholder="Address1" required
+                            [(ngModel)]="address1" #userAddress1="ngModel"
+                            >
+                        </div>
+                        <!-- Home Address1 Error Message-->
+                        <div class="col-md-9 error-msg" *ngIf="!userAddress1.valid && userAddress1.touched">  
+                            Home Address1 is invalid!
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-10">
+                        <div class="col-md-1 label-spacing text-right">
+                            <label for="address2">Address2 </label>
+                        </div>
+                        <div class="col-md-9 block-width">
+                            <input type="text" id="address2" name="address2" placeholder="Address2" 
+                              [(ngModel)]="address2" #userAddress2="ngModel" required
+                            >
+                        </div>
+                        <!-- Home Address2 Error Message-->
+                        <div class="col-md-9 error-msg" *ngIf="!userAddress2.valid && userAddress2.touched">  
+                            Home Address2 is invalid!
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Company Address -->
+                <div *ngIf="address === 'company'">
+                    <div class="col-md-10">
+                        <div class="col-md-1 label-spacing ">
+                            <label for="address">Company Address1 </label>
+                        </div>
+                        <div class="col-md-9 block-width">
+                            <input type="text" id="companyAddress1" name="companyAddress1" placeholder="Company Address1"
+                                required [(ngModel)]="companyAddress1" #userCompanyAddress1="ngModel"
+                            >
+                        </div>
+                         <!-- Company Address1 Error Message-->
+                        <div class="col-md-9 error-msg" *ngIf="!userCompanyAddress1.valid && userCompanyAddress1.touched">  
+                            Company Address1 is invalid!
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="col-md-1 label-spacing text-right">
+                            <label for="companyAddress">Company Address </label>
+                        </div>
+                        <div class="col-md-9 block-width">
+                            <input type="text" id="companyAddress" name="companyAddress" placeholder="Company Address"
+                             [(ngModel)]="companyAddress" #userCompanyAddress="ngModel" required
+                            >
+                        </div>
+                        <!-- Company Address Error Message-->
+                        <div class="col-md-9 error-msg" *ngIf="!userCompanyAddress.valid && userCompanyAddress.touched">  
+                            Company Address is invalid!
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Interests -->
+                <div class="col-md-10">
+                    <div class="col-md-1 label-spacing text-right">
+                        <label for="intrests">Interests </label>
+                    </div>
+                    <div class="col-md-9 block-width">
+                        <input type="text" id="intrests" name="interests" (ngModelChange)="showInterest($event)"
+                            [(ngModel)]="interests" #userInterests="ngModel" required autocomplete="off"
+                        >
+                    </div>
+                    <!-- Interest Error Message-->
+                    <div class="col-md-9 error-msg" *ngIf="!userInterests.valid && userInterests.touched">  
+                        Interest cann't be blank!
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="col-md-9 col-md-offset-1">
+                        <ng-container *ngFor="let interest of listOfInterests">
+                            <div class="col-md-3 interest-popup-spacing" [ngClass]="{'blue-backgound-color': interest }" >
+                                {{interest}}
+                                <span class="text-right close-button-position" 
+                                    *ngIf="interest" (click)="removeInterest(interest)"
+                                >
+                                    x
+                                </span>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+                <!-- Subscribe to news letter -->
+                <div class="col-md-10">
+                    <div class="col-md-1 label-spacing text-right left-spacing">
+                        <div class="wrapper">
+                            <input type="checkbox" id="subscribe" name= "subscribe" class="subscribe-checkbox" 
+                                [(ngModel)]="subscribe" #userSubscription="ngModel"
+                            >
+                        </div>
+                    </div>
+                    <div class="col-md-7 field-spacing left-padding">
+                        <label class="field-spacing" for="subscribe">Subscribe to the news letter</label>
+                    </div>
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="col-md-8 pull-right field-spacing">
+                        <button class="submit-button" type="submit" [disabled]="(!newUserForm.form.valid) || (!photoUploaded)"
+                        >
+                        Submit
+                        </button>
+                </div>
+            </form>
+        </div>
+
+        <!--Profile Section-->
+        <div class="col-md-8 profile-section-spacing" *ngIf="showProfileSection">
+            <div class="col-md-10 text-left">
+                <p>
+                    I am <span>{{'Mr. ' + firstName + ' ' + lastName }}</span> and
+                    I am <span>{{' ' + ageRangeValue + ' '}}</span> and you can <br> send your emails
+                    to <span>{{' ' + email + ' .'}}</span> I lives <br> in the state of  <span>{{state + '.'}}</span>
+                    I like to <span>{{' ' + interestListInSentence + ' .'}}</span><br>
+                    <span class="white-color" *ngIf="subscribe">
+                        And please send me the news letters.
+                        <br>
+                    </span>
+                    Please reach out to me on my phone  <span>{{telephone | phoneNumberFormatter }}</span>.
+                </p>
+            </div>
+            <div class="col-md-10">
+                <button class="btn btn-primary agree-button" type="button" name="agree"
+                    (click)="onAgree()"
+                >
+                    Agree
+                </button>
+            </div>
+        </div>
+    </div>
+
