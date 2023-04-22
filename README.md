@@ -1,2 +1,2 @@
 # registration-portal
-Registration Portal
+Registration Portal in Angular
